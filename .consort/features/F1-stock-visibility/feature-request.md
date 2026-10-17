@@ -1,0 +1,15 @@
+# Record and view stock by SKU and location
+
+I need the team to file a SKU's stock at a physical location and see it again. This is the foundation: until we can record what is on a shelf and read it back, nothing else in the warehouse works.
+
+Concretely for this feature:
+
+- File the stock level of one SKU at one location, and retrieve it later.
+- When the operator enters a location, they shouldn't have to retype one they've already used: offer the locations already on record to choose from, while still letting them record stock at a brand-new location that has never been used. How that's presented is the designer's call; what matters is that an existing location is reusable without retyping and a new one is never blocked.
+- A SKU can hold stock at more than one location; each `(sku, location)` pair is its own record and is uniquely addressable. Two records must never share that pair (resolve the collision at write time, never store a duplicate, never show an error page).
+- Each unit is identified by a single tracking code (a `tracking_code`) that encodes its location, batch, and serial together. The team is fine with one combined code for V1; a later iteration will revisit splitting those fields apart. Store and show that combined code on the stock record now.
+- The home screen is a calm, scannable stock-by-location table: SKU, location, quantity (right-aligned), and the tracking code column, rendered adaptively (a cell shows its value, or an explicit "not tracked" when absent, never blank). An empty location shows an explicit "No stock at this location" state, never a blank page.
+- A SKU detail view shows that SKU's stock across its locations, including its tracking code. Optional detail that is not tracked (par level) shows a clear "not tracked", never a blank region or a null crash.
+- This feature establishes the app shell, and the shell carries the StockFlow brand: a navbar with the **warehouse app icon** next to the "StockFlow" title, plus a browser-tab favicon. The icon asset ships with the design brief (alongside `design-brief.md`, in `assets/warehouse.png`); the design system installs it (the guide's `app_icon`) and references it from the navbar and the favicon. The shell is not done until the warehouse icon actually renders (a real navbar image + favicon, not a placeholder or a missing image). See the design brief, "Iconography and app identity".
+
+This is read-and-record only; adjusting quantities and receiving inbound goods are their own features. Stock data recorded here must survive every later schema change with no loss.
