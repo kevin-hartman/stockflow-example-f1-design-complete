@@ -1,0 +1,18 @@
+{
+  "id": "AC3-par-level-not-tracked",
+  "given": "a SKU has stock filed but no par level is tracked for it",
+  "when": "the operator opens that SKU's detail view",
+  "then": "the par level region shows a clear \"not tracked\" instead of a blank region, and the view renders without error",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers the optional, untracked par-level detail, separate from the stock entries and their tracking codes."
+  },
+  "layer": "E2E",
+  "architectural_notes": "E2E: F1 stores no par level (no column; par levels are owned by a later feature, OD4 deferred), so the service returns par_level null in EP5 and the client renders sku-par-level with the sku-par-not-tracked state instead of a blank region. Verified by Playwright against the live API: the page renders without error and the par region shows Not tracked. No schema change.",
+  "ui_seams": [
+    "sku-par-level",
+    "sku-par-not-tracked"
+  ],
+  "api_contract_id": "EP5-get-sku-detail"
+}

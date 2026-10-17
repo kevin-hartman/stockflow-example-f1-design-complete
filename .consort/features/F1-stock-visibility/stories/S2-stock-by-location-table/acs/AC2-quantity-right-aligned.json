@@ -1,0 +1,18 @@
+{
+  "id": "AC2-quantity-right-aligned",
+  "given": "the home-screen stock table lists stock records with quantities of differing digit lengths",
+  "when": "the operator scans the quantity column",
+  "then": "quantity values are right-aligned in their column so magnitudes line up for scanning",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers the quantity column's presentation (alignment), which can be wrong while the rows and their values are listed correctly."
+  },
+  "layer": "E2E",
+  "ui_seams": [
+    "stock-col-quantity",
+    "stock-qty-<sku>-<loc>"
+  ],
+  "api_contract_id": "EP4-list-stock",
+  "architectural_notes": "E2E: quantity cells rendered from real EP4 rows (quantity > 0, differing digit lengths) are asserted right-aligned (computed text-align right, tabular-nums) in Playwright against the live API. Pure presentation in the React stock-table component under client/src/components; no server logic beyond the EP4 read path."
+}

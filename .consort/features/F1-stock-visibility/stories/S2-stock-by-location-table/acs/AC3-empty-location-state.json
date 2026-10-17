@@ -1,0 +1,19 @@
+{
+  "id": "AC3-empty-location-state",
+  "given": "a location is on record but has no stock filed at it",
+  "when": "the operator views that location's stock on the home screen",
+  "then": "an explicit \"No stock at this location\" state is shown instead of a blank page or empty table",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers the empty state when there are no rows, a separate path from rendering populated rows and their alignment."
+  },
+  "layer": "E2E",
+  "ui_seams": [
+    "warehouse-select",
+    "stock-empty",
+    "stock-table"
+  ],
+  "api_contract_id": "EP4-list-stock",
+  "architectural_notes": "E2E: OD3 resolved - a location on record with no stock is one whose stock_records rows are all at quantity 0; seed it via a quantity-0 filing (valid under CHECK quantity >= 0). EP3 GET /api/locations still lists it so warehouse-select offers it, while EP4 GET /api/stock/records?location= excludes quantity-0 rows (repository WHERE quantity > 0) and returns [], so the client renders stock-empty 'No stock at this location' and no stock-table rows. Verified by Playwright against the live API on the paired branch."
+}

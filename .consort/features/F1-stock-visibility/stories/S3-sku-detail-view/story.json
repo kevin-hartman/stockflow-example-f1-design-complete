@@ -1,0 +1,1 @@
+{"id":"S3-sku-detail-view","asA":"warehouse operator","iWantTo":"open a SKU detail view","soThat":"I see that SKU's stock across locations","requires_e2e":true,"independence":{"distinct_from_prior":true,"rationale":"Adds the per-SKU detail view aggregating locations and not-tracked par level, distinct from the home table."}}

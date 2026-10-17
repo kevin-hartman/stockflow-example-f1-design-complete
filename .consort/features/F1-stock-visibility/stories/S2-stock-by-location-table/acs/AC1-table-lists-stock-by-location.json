@@ -1,0 +1,20 @@
+{
+  "id": "AC1-table-lists-stock-by-location",
+  "given": "stock records exist for several (sku, location) pairs, some with a tracking code and some without",
+  "when": "the operator opens the home screen",
+  "then": "a stock-by-location table shows one row per (sku, location) record with SKU, location, quantity and tracking code columns; each tracking code cell shows its value, or an explicit \"not tracked\" when absent, and is never blank",
+  "status": "draft",
+  "layer": "E2E",
+  "ui_seams": [
+    "stock-table",
+    "stock-col-sku",
+    "stock-col-location",
+    "stock-col-quantity",
+    "stock-col-tracking",
+    "stock-row-<sku>-<loc>",
+    "stock-tracking-<sku>-<loc>",
+    "stock-not-tracked"
+  ],
+  "api_contract_id": "EP4-list-stock",
+  "architectural_notes": "E2E: the home stock-table renders the real EP4 GET /api/stock/records response, verified by Playwright against the live API on the paired branch. One row per STOCKED (sku, location) record: EP4 excludes quantity-0 rows (OD3 resolved), so seeded rows must have quantity > 0; a null tracking_code renders the stock-not-tracked badge client-side, never blank. Read path app/routes/stock.py -> app/services/stock_service.py -> app/repositories/stock_repository.py (AP2, ix_stock_records_location_sku)."
+}

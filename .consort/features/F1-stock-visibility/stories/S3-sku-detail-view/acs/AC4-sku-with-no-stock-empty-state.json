@@ -1,0 +1,17 @@
+{
+  "id": "AC4-sku-with-no-stock-empty-state",
+  "given": "a SKU has no stock filed at any location",
+  "when": "the operator opens that SKU's detail view",
+  "then": "an explicit empty state says the SKU has no stock at any location, instead of a blank page, an empty list or an error page",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers the zero-records path for a SKU, independently breakable from rendering populated location entries."
+  },
+  "layer": "E2E",
+  "architectural_notes": "E2E: stock_records remains the SKU authority (OD1 deferred), so a SKU with no stocked row (never filed, or only quantity-0 rows) is not an error: the service returns 200 with an empty locations list (never 404/5xx) and the client renders sku-empty with the Receive CTA to /receive?sku=<sku>, no sku-location entries. Verified by Playwright against the live API on the paired branch.",
+  "ui_seams": [
+    "sku-empty"
+  ],
+  "api_contract_id": "EP5-get-sku-detail"
+}

@@ -1,0 +1,25 @@
+{
+  "ordinal": 29,
+  "step": 0,
+  "label": "navigator-reconcile",
+  "kind": "invoke-role",
+  "role": "navigator",
+  "mode": "reconcile",
+  "action": {
+    "kind": "invoke-role",
+    "role": "navigator",
+    "buildMode": "reconcile"
+  },
+  "produced": [
+    ".consort/features/F1-stock-visibility/reconcile-verdict.json",
+    ".tmp/design-drive.log"
+  ],
+  "deleted": [],
+  "snapshotted": false,
+  "transcript": {
+    "role": "navigator",
+    "model": "sonnet",
+    "toolCount": 1,
+    "finalTextChars": 126
+  }
+}

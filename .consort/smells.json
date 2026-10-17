@@ -1,3 +1,37 @@
 {
-  "detected": []
+  "detected": [
+    {
+      "smell": "reflect-testlist-defect",
+      "cycle_ids": [],
+      "detail": "reflection gate: T38/T39 assert an 'S2 add-index migration' (ix_stock_records_location_sku) but neither S2 AC nor the architecture declares such a migration: architecture.md/NFR1 state the only F1 migration is the initial create_table, and AP1 merely flags an index for a later DBA decision. The tests are mis-premised (a Driver would have to invent a migration or rewrite the shipped one). Either drop T38/T39, or have the architect declare the index migration (persistence invariant + AC note) first; row-survival (T39) then applies only to that additive migration.",
+      "story_id": "S2-stock-by-location-table",
+      "detected_at": "2026-10-17T17:28:24.472Z",
+      "resolution": "revised by human-proxy: full design re-run (test_list gate)",
+      "resolution_kind": "revised",
+      "revised_artifact_sha": "e8ce6cdcfb77bb3729c90ea8bc9e451df148342f"
+    },
+    {
+      "smell": "reflect-architecture-defect",
+      "cycle_ids": [],
+      "detail": "reflection gate: AC3 'location on record but no stock' depends on OD3 (still open). T43 must seed a location with no stock, but the only representation is quantity-0 rows, and neither the AC notes nor architecture decide whether EP4 ?location= hides quantity-0 rows (returning [] -> stock-empty) or returns them (rendering a row, not stock-empty). As written T43's setup and the expected stock-empty outcome are ambiguous/unsatisfiable. Resolve OD3 (e.g. EP4 excludes quantity 0 rows) in architectural_notes and persistence/contract.",
+      "story_id": "S2-stock-by-location-table",
+      "detected_at": "2026-10-17T17:28:24.472Z",
+      "resolution": "revised by human-proxy: full design re-run (test_list gate)",
+      "resolution_kind": "revised",
+      "revised_artifact_sha": "e8ce6cdcfb77bb3729c90ea8bc9e451df148342f"
+    },
+    {
+      "smell": "reflect-architecture-defect",
+      "cycle_ids": [],
+      "detail": "reflection gate: AC3 seeds an 'empty' location via a quantity-0 filing (OD3, still open), but that creates a stock_records row, so EP4 GET /api/stock/records?location= returns one row (qty 0), not an empty list. That contradicts AC1 ('one row per (sku, location) record') and makes stock-empty unreachable and T43/T44 unsatisfiable, unless zero-quantity rows are hidden, which no AC or note states. Resolve OD3 for this story: either EP4 excludes quantity-0 rows (and AC1 says so), or the empty state is defined as 'all rows at quantity 0'. Then align the AC3 notes and the T43/T44 seeding with that rule.",
+      "story_id": "S2-stock-by-location-table",
+      "detected_at": "2026-10-17T17:30:30.506Z",
+      "resolution": "revised by human-proxy: full design re-run (architecture gate)",
+      "resolution_kind": "revised",
+      "revised_artifact_sha": "faa5ef002b3e8344bfe6281bd902c49d66eb88b0"
+    }
+  ],
+  "reflect_revise_count": {
+    "S2-stock-by-location-table": 2
+  }
 }

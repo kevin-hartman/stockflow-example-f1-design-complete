@@ -1,0 +1,5 @@
+[
+  {"id": "fit-1", "description": "GET /api/stock/records responds with Content-Type application/json (never text/html) for both the unfiltered and the ?location= filtered request", "ac_id": "AC1-table-lists-stock-by-location", "status": "pending", "kind": "fitness", "nfr_id": "NFR5-spa-json-boundary"},
+  {"id": "fit-2", "description": "Downgrading the S2 add-index migration to its own down_revision then upgrading head on the paired branch recreates ix_stock_records_location_sku on (location, sku) in stock_records (schema recreated; marked @pytest.mark.migration)", "ac_id": "AC1-table-lists-stock-by-location", "status": "pending", "kind": "fitness"},
+  {"id": "fit-3", "description": "Rows seeded under a per-run-unique key in stock_records before the S2 add-index migration is applied survive the migration with their sku, location, quantity and tracking_code values unchanged", "ac_id": "AC1-table-lists-stock-by-location", "status": "pending", "kind": "fitness"}
+]

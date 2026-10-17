@@ -1,0 +1,17 @@
+{
+  "ordinal": 7,
+  "step": 0,
+  "label": "gate-surface",
+  "kind": "surface-gate",
+  "story": "S1-file-stock",
+  "action": {
+    "kind": "surface-gate",
+    "story": "S1-file-stock"
+  },
+  "produced": [
+    ".consort/features/F1-stock-visibility/pipeline.json",
+    ".tmp/design-drive.log"
+  ],
+  "deleted": [],
+  "snapshotted": false
+}

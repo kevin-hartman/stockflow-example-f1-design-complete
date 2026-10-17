@@ -1,0 +1,20 @@
+{
+  "id": "AC3-collision-resolved-at-write",
+  "given": "a stock record already exists for a (sku, location) pair",
+  "when": "the operator files stock for the same (sku, location) pair again with a different quantity or tracking code",
+  "then": "the existing record is updated in place with the new values, exactly one record exists for that pair, no duplicate is stored, and the operator sees a normal confirmation rather than an error page",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers the write-collision path for an existing key, independently breakable from a first write and from read-back."
+  },
+  "layer": "E2E",
+  "architectural_notes": "E2E: re-submitting the form for an existing (sku, location) must render a normal confirmation with the file-stock-updated note derived from the real POST response (created=false), never an error page. The collision is resolved in the repository via a single INSERT ... ON CONFLICT (sku, location) DO UPDATE inside the service-owned transaction, backed by the unique constraint PI1 so concurrent writes can never store a duplicate; a branch-DB test asserts exactly one row for the pair.",
+  "ui_seams": [
+    "file-stock-form",
+    "file-stock-submit",
+    "file-stock-confirmation",
+    "file-stock-updated"
+  ],
+  "api_contract_id": "EP1-file-stock"
+}

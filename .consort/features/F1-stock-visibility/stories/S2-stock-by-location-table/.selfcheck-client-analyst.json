@@ -1,0 +1,50 @@
+[
+ {
+  "id": "cli-1",
+  "description": "Playwright e2e (client/tests/e2e/stock-by-location-table.spec.ts) navigates the deployed app at route / against the live paired-branch DB, files stock under a crypto.randomUUID()-suffixed sku, and sees a stock-row-<sku>-<loc> row inside stock-table with stock-col-sku, stock-col-location, stock-col-quantity and stock-col-tracking headers",
+  "ac_id": "AC1-table-lists-stock-by-location",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/stock-by-location-table.spec.ts"
+ },
+ {
+  "id": "cli-2",
+  "description": "Playwright e2e (client/tests/e2e/stock-by-location-table.spec.ts) at route / shows the filed tracking code in stock-tracking-<sku>-<loc> for a record filed with a tracking code, with a per-run unique sku, against the live DB",
+  "ac_id": "AC1-table-lists-stock-by-location",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/stock-by-location-table.spec.ts"
+ },
+ {
+  "id": "cli-3",
+  "description": "Playwright e2e (client/tests/e2e/stock-by-location-table.spec.ts) at route / shows the explicit stock-not-tracked badge reading 'Not tracked' (never a blank cell) in stock-tracking-<sku>-<loc> for a record filed without a tracking code, using a per-run unique sku, against the live DB",
+  "ac_id": "AC1-table-lists-stock-by-location",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/stock-by-location-table.spec.ts"
+ },
+ {
+  "id": "cli-4",
+  "description": "Playwright e2e (client/tests/e2e/stock-quantity-alignment.spec.ts) at route / files records with quantities of differing digit lengths under per-run unique skus against the live DB, then asserts each stock-qty-<sku>-<loc> cell and the stock-col-quantity header are right-aligned via the stock-table__num design-guide class (computed text-align right)",
+  "ac_id": "AC2-quantity-right-aligned",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/stock-quantity-alignment.spec.ts"
+ },
+ {
+  "id": "cli-5",
+  "description": "Playwright e2e (client/tests/e2e/stock-empty-location.spec.ts) at route / seeds a location with a quantity-0 filing under a unique location name against the live DB, picks that location through the warehouse-select combobox, and sees the stock-empty state reading 'No stock at this location'",
+  "ac_id": "AC3-empty-location-state",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/stock-empty-location.spec.ts"
+ },
+ {
+  "id": "cli-6",
+  "description": "Playwright e2e (client/tests/e2e/stock-empty-location.spec.ts) at route / shows no populated stock-table rows for the empty location chosen through warehouse-select, so the page is not a blank table",
+  "ac_id": "AC3-empty-location-state",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/stock-empty-location.spec.ts"
+ }
+]

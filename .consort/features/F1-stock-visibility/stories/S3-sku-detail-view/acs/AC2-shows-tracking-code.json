@@ -1,0 +1,18 @@
+{
+  "id": "AC2-shows-tracking-code",
+  "given": "a SKU has stock records whose combined tracking codes were filed",
+  "when": "the operator opens that SKU's detail view",
+  "then": "each location entry shows that record's combined tracking code, or an explicit \"not tracked\" where none was filed, never blank",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers display of the tracking code per location entry, which can be missing while locations and quantities are listed correctly."
+  },
+  "layer": "E2E",
+  "architectural_notes": "E2E: each sku-location entry renders tracking_code from the real EP5 response; a null tracking_code (nullable column, no not_null invariant) renders the sku-not-tracked badge client-side, never blank. Verified by Playwright on the paired branch with one tracked and one untracked location for the SKU; no server logic beyond the EP5 read path.",
+  "ui_seams": [
+    "sku-tracking-<loc>",
+    "sku-not-tracked"
+  ],
+  "api_contract_id": "EP5-get-sku-detail"
+}

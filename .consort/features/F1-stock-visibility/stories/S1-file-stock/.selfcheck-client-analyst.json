@@ -1,0 +1,58 @@
+[
+ {
+  "id": "cli-1",
+  "description": "Playwright e2e client/tests/e2e/file-stock.spec.ts navigates the deployed app to route /file, fills field-sku (crypto.randomUUID-suffixed sku), a newly typed field-location, field-quantity and field-tracking-code, submits file-stock-submit against the live DB, and file-stock-confirmation appears showing that sku, location, quantity and tracking code",
+  "ac_id": "AC1-file-stock-record",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/file-stock.spec.ts"
+ },
+ {
+  "id": "cli-2",
+  "description": "Playwright e2e client/tests/e2e/file-stock.spec.ts types a brand-new location into the field-location creatable combobox on /file and submitting it is accepted without a field-location error",
+  "ac_id": "AC1-file-stock-record",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/file-stock.spec.ts"
+ },
+ {
+  "id": "cli-3",
+  "description": "Playwright e2e client/tests/e2e/retrieve-stock.spec.ts files a stock record under a randomUUID-suffixed sku on /file, then fills retrieve-form with that sku and picks retrieve-location, and retrieve-result shows the same sku, location, quantity and tracking code from the live API",
+  "ac_id": "AC2-retrieve-stock-record",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/retrieve-stock.spec.ts"
+ },
+ {
+  "id": "cli-4",
+  "description": "Playwright e2e client/tests/e2e/retrieve-stock.spec.ts shows that after filing under a new randomUUID-suffixed location on /file, that location is offered as an option in the field-location combobox when the page is reloaded",
+  "ac_id": "AC2-retrieve-stock-record",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/retrieve-stock.spec.ts"
+ },
+ {
+  "id": "cli-5",
+  "description": "Playwright e2e client/tests/e2e/file-stock-collision.spec.ts files the same randomUUID-suffixed (sku, location) twice on /file with a different quantity the second time against the live DB, and file-stock-confirmation shows the new quantity with the file-stock-updated note",
+  "ac_id": "AC3-collision-resolved-at-write",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/file-stock-collision.spec.ts"
+ },
+ {
+  "id": "cli-6",
+  "description": "Playwright e2e client/tests/e2e/file-stock-collision.spec.ts re-files an existing (sku, location) on /file and no error alert or form-error is displayed, only the normal file-stock-confirmation",
+  "ac_id": "AC3-collision-resolved-at-write",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/file-stock-collision.spec.ts"
+ },
+ {
+  "id": "cli-7",
+  "description": "Playwright e2e client/tests/e2e/file-stock-collision.spec.ts re-files an existing (sku, location) with a different tracking code, then retrieves it via retrieve-form, and retrieve-result shows the second write's tracking code",
+  "ac_id": "AC3-collision-resolved-at-write",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/file-stock-collision.spec.ts"
+ }
+]

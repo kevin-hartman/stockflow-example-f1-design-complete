@@ -1,0 +1,23 @@
+{
+  "id": "AC1-file-stock-record",
+  "given": "the operator is on the file-stock screen, where locations already on record are offered to choose from and a brand-new location can still be entered",
+  "when": "the operator submits a SKU, a location (chosen from the offered locations or newly entered), a quantity and a tracking code",
+  "then": "the screen confirms the stock was filed for that (sku, location), showing its quantity and tracking code, and a newly entered location is accepted without being blocked",
+  "status": "draft",
+  "layer": "E2E",
+  "architectural_notes": "E2E: a client form submission whose confirmation is derived from the real POST /api/stock response, so it is verified by Playwright against the live API on the paired branch. Boundary app/routes/stock.py validates input and calls app/services/stock_service.py (upsert by (sku, location)), which persists via app/repositories/stock_repository.py; the field-location combobox options come from GET /api/locations (EP3-list-locations), and a new location is plain free text, never rejected. Validation messages name the offending field at the boundary; no actor/auth (out of bounds V1).",
+  "ui_seams": [
+    "file-stock-form",
+    "field-sku",
+    "field-location",
+    "field-quantity",
+    "field-tracking-code",
+    "file-stock-submit",
+    "file-stock-confirmation",
+    "confirm-sku",
+    "confirm-location",
+    "confirm-quantity",
+    "confirm-tracking-code"
+  ],
+  "api_contract_id": "EP1-file-stock"
+}

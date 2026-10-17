@@ -1,0 +1,4 @@
+[
+  {"id": "fit-1", "description": "GET /api/skus/{sku} for a SKU with stock at two or more locations responds with Content-Type application/json, never text/html (NFR5-spa-json-boundary)", "ac_id": "AC1-lists-stock-across-locations", "status": "pending", "kind": "fitness", "nfr_id": "NFR5-spa-json-boundary"},
+  {"id": "fit-2", "description": "GET /api/skus/{sku} for a SKU with no stocked row responds 200 with Content-Type application/json, never an HTML error page (NFR5-spa-json-boundary)", "ac_id": "AC4-sku-with-no-stock-empty-state", "status": "pending", "kind": "fitness", "nfr_id": "NFR5-spa-json-boundary"}
+]

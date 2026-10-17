@@ -1,0 +1,21 @@
+{
+  "id": "AC2-retrieve-stock-record",
+  "given": "a stock record has been filed for a SKU at a location with a quantity and tracking code",
+  "when": "the operator retrieves the stock for that (sku, location) later",
+  "then": "the returned record shows the same SKU, location, quantity and combined tracking code that were filed, and that location is now offered as a known location when filing stock",
+  "status": "draft",
+  "independence": {
+    "distinct_from_prior": true,
+    "rationale": "Covers durable read-back of a previously filed record and reuse of its location later, which can fail while the submit-and-confirm round-trip passes."
+  },
+  "layer": "E2E",
+  "architectural_notes": "E2E: the retrieve panel renders the server's GET /api/stock?sku=&location= response, and the field-location combobox is re-queried from GET /api/locations after filing, so both halves are client-server contracts verified by Playwright on the paired branch. Read path is boundary app/routes/stock.py -> app/services/stock_service.py -> app/repositories/stock_repository.py (lookup on the unique (sku, location) key; distinct-locations query AP1); durability is proven by a real-DB read-back, never a mock.",
+  "ui_seams": [
+    "retrieve-form",
+    "retrieve-location",
+    "retrieve-submit",
+    "retrieve-result",
+    "field-location"
+  ],
+  "api_contract_id": "EP2-get-stock"
+}

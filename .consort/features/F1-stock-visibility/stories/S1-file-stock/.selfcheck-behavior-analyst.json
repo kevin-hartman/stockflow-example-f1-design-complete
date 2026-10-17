@@ -1,0 +1,18 @@
+[
+{"id":"bhv-1","description":"POST /api/stock for a new unique (sku, location) returns 200 with the filed sku, location, quantity, tracking_code and created=true","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-2","description":"POST /api/stock with a brand-new never-seen location is accepted with 200 rather than rejected","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-3","description":"POST /api/stock omitting sku returns 422 with an error naming the sku field","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-4","description":"POST /api/stock omitting location returns 422 with an error naming the location field","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-5","description":"POST /api/stock omitting quantity returns 422 with an error naming the quantity field","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-6","description":"POST /api/stock with a negative quantity returns 422 naming the quantity field and stores no record retrievable by GET","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-7","description":"POST /api/stock with a null tracking_code is accepted with 200 and the record reads back with tracking_code null","ac_id":"AC1-file-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-8","description":"GET /api/stock for a filed (sku, location) returns 200 with the same sku, location, quantity and tracking_code that were filed","ac_id":"AC2-retrieve-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-9","description":"GET /api/stock for a (sku, location) with no record returns 404 with a detail message","ac_id":"AC2-retrieve-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-10","description":"GET /api/locations includes a location after stock is filed there","ac_id":"AC2-retrieve-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-11","description":"GET /api/stock returns only the requested pair's record when the same sku is filed at two different locations","ac_id":"AC2-retrieve-stock-record","status":"pending","kind":"behavior"},
+{"id":"bhv-12","description":"Re-filing an existing (sku, location) with a new quantity returns 200 with created=false, never a 4xx or 5xx","ac_id":"AC3-collision-resolved-at-write","status":"pending","kind":"behavior"},
+{"id":"bhv-13","description":"After re-filing an existing (sku, location), GET returns the new quantity and new tracking_code (updated in place)","ac_id":"AC3-collision-resolved-at-write","status":"pending","kind":"behavior"},
+{"id":"bhv-14","description":"Filing the same (sku, location) twice leaves exactly one record for the pair, with a single occurrence of the location in GET /api/locations","ac_id":"AC3-collision-resolved-at-write","status":"pending","kind":"behavior"},
+{"id":"bhv-15","description":"Filing the same SKU at two different locations yields two coexisting records, each independently retrievable with its own quantity","ac_id":"AC3-collision-resolved-at-write","status":"pending","kind":"behavior"},
+{"id":"bhv-16","description":"Filing two different SKUs at the same location yields two coexisting records, each independently retrievable with its own quantity","ac_id":"AC3-collision-resolved-at-write","status":"pending","kind":"behavior"}
+]

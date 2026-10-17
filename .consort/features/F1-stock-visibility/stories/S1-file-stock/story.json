@@ -1,0 +1,1 @@
+{"id":"S1-file-stock","asA":"warehouse operator","iWantTo":"file a SKU's stock at a location, reusing known locations or entering a new one","soThat":"stock is recorded and retrievable","requires_e2e":true}

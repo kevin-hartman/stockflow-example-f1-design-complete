@@ -1,0 +1,32 @@
+{
+  "ordinal": 14,
+  "step": 0,
+  "label": "revise-route",
+  "kind": "revise-route",
+  "role": "test-strategist",
+  "story": "S2-stock-by-location-table",
+  "action": {
+    "kind": "revise-route",
+    "story": "S2-stock-by-location-table",
+    "role": "test-strategist",
+    "gate": "test_list",
+    "reason": "blocking smell \"reflect-testlist-defect\": reflection gate: T38/T39 assert an 'S2 add-index migration' (ix_stock_records_location_sku) but neither S2 AC nor the architecture declares such a migration: architecture.md/NFR1 state the only F1 migration is the initial create_table, and AP1 merely flags an index for a later DBA decision. The tests are mis-premised (a Driver would have to invent a migration or rewrite the shipped one). Either drop T38/T39, or have the architect declare the index migration (persistence invariant + AC note) first; row-survival (T39) then applies only to that additive migration.",
+    "source": "smell:reflect-testlist-defect"
+  },
+  "produced": [
+    ".consort/features/F1-stock-visibility/.handback/architect-reviewer.S2-stock-by-location-table.md",
+    ".consort/features/F1-stock-visibility/.handback/test-strategist.S2-stock-by-location-table.md",
+    ".consort/features/F1-stock-visibility/pipeline.json",
+    ".consort/features/F1-stock-visibility/stories/S2-stock-by-location-table/acs/AC1-table-lists-stock-by-location.json",
+    ".consort/features/F1-stock-visibility/stories/S2-stock-by-location-table/acs/AC3-empty-location-state.json",
+    ".consort/features/F1-stock-visibility/test-list.json",
+    ".consort/smells.json",
+    ".tmp/design-drive.log"
+  ],
+  "deleted": [
+    ".consort/features/F1-stock-visibility/stories/S2-stock-by-location-table/analyst-ordered.json",
+    ".consort/features/F1-stock-visibility/stories/S2-stock-by-location-table/reflect-verdict.json",
+    ".consort/features/F1-stock-visibility/stories/S2-stock-by-location-table/test-list-per-story.json"
+  ],
+  "snapshotted": false
+}

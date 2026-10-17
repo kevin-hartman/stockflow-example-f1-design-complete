@@ -1,0 +1,16 @@
+{
+  "id": "AC1-lists-stock-across-locations",
+  "given": "a SKU has stock filed at two or more locations",
+  "when": "the operator opens that SKU's detail view",
+  "then": "the detail view lists each location holding that SKU with its quantity, one entry per (sku, location) record and only that SKU's records",
+  "status": "draft",
+  "layer": "E2E",
+  "architectural_notes": "E2E: the /sku/:sku React page renders the real EP5 GET /api/skus/{sku} response, verified by Playwright against the live API on the paired branch; seed two+ locations for the SKU plus another SKU's row to prove only this SKU's records appear. Read path app/routes/stock.py -> app/services/stock_service.py -> app/repositories/stock_repository.py (WHERE sku = :sku AND quantity > 0, served by the UNIQUE(sku, location) index PI1); quantity-0 rows are excluded consistent with OD3/EP4.",
+  "ui_seams": [
+    "sku-detail",
+    "sku-locations",
+    "sku-location-<loc>",
+    "sku-qty-<loc>"
+  ],
+  "api_contract_id": "EP5-get-sku-detail"
+}

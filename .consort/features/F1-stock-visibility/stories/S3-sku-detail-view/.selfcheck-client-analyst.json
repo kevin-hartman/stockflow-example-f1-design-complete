@@ -1,0 +1,42 @@
+[
+ {
+  "id": "cli-1",
+  "description": "Playwright e2e (client/tests/e2e/sku-detail-locations.spec.ts) files a randomUUID-suffixed SKU at two locations plus another SKU's row via the live API, navigates the deployed /sku/:sku route, and asserts sku-detail and sku-locations show one sku-location-<loc> entry with sku-qty-<loc> per location and none from the other SKU",
+  "ac_id": "AC1-lists-stock-across-locations",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/sku-detail-locations.spec.ts"
+ },
+ {
+  "id": "cli-2",
+  "description": "Playwright e2e (client/tests/e2e/sku-detail-tracking.spec.ts) opens the deployed /sku/:sku route for a randomUUID-suffixed SKU with a tracked location and asserts sku-tracking-<loc> shows the filed combined tracking code",
+  "ac_id": "AC2-shows-tracking-code",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/sku-detail-tracking.spec.ts"
+ },
+ {
+  "id": "cli-3",
+  "description": "Playwright e2e (client/tests/e2e/sku-detail-tracking.spec.ts) opens the deployed /sku/:sku route for a randomUUID-suffixed SKU with an untracked location and asserts that entry shows the sku-not-tracked badge instead of a blank",
+  "ac_id": "AC2-shows-tracking-code",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/sku-detail-tracking.spec.ts"
+ },
+ {
+  "id": "cli-4",
+  "description": "Playwright e2e (client/tests/e2e/sku-detail-par-level.spec.ts) opens the deployed /sku/:sku route for a randomUUID-suffixed stocked SKU and asserts sku-par-level contains sku-par-not-tracked with text Not tracked and no sku-error is shown",
+  "ac_id": "AC3-par-level-not-tracked",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/sku-detail-par-level.spec.ts"
+ },
+ {
+  "id": "cli-5",
+  "description": "Playwright e2e (client/tests/e2e/sku-detail-empty.spec.ts) opens the deployed /sku/:sku route for a never-filed randomUUID-suffixed SKU and asserts sku-empty states no stock at any location with a Receive link to /receive?sku=<sku>, no sku-location entries and no sku-error",
+  "ac_id": "AC4-sku-with-no-stock-empty-state",
+  "status": "pending",
+  "kind": "client",
+  "scenario_file": "client/tests/e2e/sku-detail-empty.spec.ts"
+ }
+]

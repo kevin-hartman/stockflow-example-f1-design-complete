@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "feature_id": "F1-stock-visibility",
+  "stories": {
+    "S1-file-stock": {
+      "status": "ready",
+      "gate": {
+        "status": "approved",
+        "history": [
+          {
+            "action": "approved",
+            "at": "2026-10-17T17:35:16.447Z",
+            "approver": "Kevin Hartman"
+          }
+        ],
+        "approver": "Kevin Hartman",
+        "approved_at": "2026-10-17T17:35:16.447Z"
+      }
+    },
+    "S2-stock-by-location-table": {
+      "status": "ready",
+      "acceptance": {
+        "decision": "revise",
+        "history": [
+          {
+            "decision": "revise",
+            "at": "2026-10-17T17:28:24.715Z",
+            "approver": "human-proxy",
+            "reason": "blocking smell \"reflect-testlist-defect\": reflection gate: T38/T39 assert an 'S2 add-index migration' (ix_stock_records_location_sku) but neither S2 AC nor the architecture declares such a migration: architecture.md/NFR1 state the only F1 migration is the initial create_table, and AP1 merely flags an index for a later DBA decision. The tests are mis-premised (a Driver would have to invent a migration or rewrite the shipped one). Either drop T38/T39, or have the architect declare the index migration (persistence invariant + AC note) first; row-survival (T39) then applies only to that additive migration."
+          },
+          {
+            "decision": "revise",
+            "at": "2026-10-17T17:30:30.737Z",
+            "approver": "human-proxy",
+            "reason": "blocking smell \"reflect-architecture-defect\": reflection gate: AC3 seeds an 'empty' location via a quantity-0 filing (OD3, still open), but that creates a stock_records row, so EP4 GET /api/stock/records?location= returns one row (qty 0), not an empty list. That contradicts AC1 ('one row per (sku, location) record') and makes stock-empty unreachable and T43/T44 unsatisfiable, unless zero-quantity rows are hidden, which no AC or note states. Resolve OD3 for this story: either EP4 excludes quantity-0 rows (and AC1 says so), or the empty state is defined as 'all rows at quantity 0'. Then align the AC3 notes and the T43/T44 seeding with that rule."
+          }
+        ],
+        "approver": "human-proxy",
+        "at": "2026-10-17T17:30:30.737Z",
+        "reason": "blocking smell \"reflect-architecture-defect\": reflection gate: AC3 seeds an 'empty' location via a quantity-0 filing (OD3, still open), but that creates a stock_records row, so EP4 GET /api/stock/records?location= returns one row (qty 0), not an empty list. That contradicts AC1 ('one row per (sku, location) record') and makes stock-empty unreachable and T43/T44 unsatisfiable, unless zero-quantity rows are hidden, which no AC or note states. Resolve OD3 for this story: either EP4 excludes quantity-0 rows (and AC1 says so), or the empty state is defined as 'all rows at quantity 0'. Then align the AC3 notes and the T43/T44 seeding with that rule."
+      },
+      "gate": {
+        "status": "approved",
+        "history": [
+          {
+            "action": "approved",
+            "at": "2026-10-17T17:35:16.776Z",
+            "approver": "Kevin Hartman"
+          }
+        ],
+        "approver": "Kevin Hartman",
+        "approved_at": "2026-10-17T17:35:16.776Z"
+      }
+    },
+    "S3-sku-detail-view": {
+      "status": "ready",
+      "gate": {
+        "status": "approved",
+        "history": [
+          {
+            "action": "approved",
+            "at": "2026-10-17T17:35:17.037Z",
+            "approver": "Kevin Hartman"
+          }
+        ],
+        "approver": "Kevin Hartman",
+        "approved_at": "2026-10-17T17:35:17.037Z"
+      }
+    }
+  },
+  "build_queue": [
+    "S1-file-stock",
+    "S2-stock-by-location-table",
+    "S3-sku-detail-view"
+  ],
+  "build_active": null
+}

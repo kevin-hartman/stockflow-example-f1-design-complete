@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": "T45",
+      "description": "GET /api/skus/{sku} for a SKU with stock at two or more locations responds with Content-Type application/json, never text/html (NFR5-spa-json-boundary)",
+      "ac_id": "AC1-lists-stock-across-locations",
+      "status": "pending",
+      "kind": "fitness",
+      "nfr_id": "NFR5-spa-json-boundary"
+    },
+    {
+      "id": "T46",
+      "description": "Playwright e2e (client/tests/e2e/sku-detail-locations.spec.ts) files a randomUUID-suffixed SKU at two locations plus another SKU's row via the live API, navigates the deployed /sku/:sku route, and asserts sku-detail and sku-locations show one sku-location-<loc> entry with sku-qty-<loc> per location and none from the other SKU",
+      "ac_id": "AC1-lists-stock-across-locations",
+      "status": "pending",
+      "kind": "client",
+      "scenario_file": "client/tests/e2e/sku-detail-locations.spec.ts"
+    },
+    {
+      "id": "T47",
+      "description": "Playwright e2e (client/tests/e2e/sku-detail-tracking.spec.ts) opens the deployed /sku/:sku route for a randomUUID-suffixed SKU with a tracked location and asserts sku-tracking-<loc> shows the filed combined tracking code",
+      "ac_id": "AC2-shows-tracking-code",
+      "status": "pending",
+      "kind": "client",
+      "scenario_file": "client/tests/e2e/sku-detail-tracking.spec.ts"
+    },
+    {
+      "id": "T48",
+      "description": "Playwright e2e (client/tests/e2e/sku-detail-tracking.spec.ts) opens the deployed /sku/:sku route for a randomUUID-suffixed SKU with an untracked location and asserts that entry shows the sku-not-tracked badge instead of a blank",
+      "ac_id": "AC2-shows-tracking-code",
+      "status": "pending",
+      "kind": "client",
+      "scenario_file": "client/tests/e2e/sku-detail-tracking.spec.ts"
+    },
+    {
+      "id": "T49",
+      "description": "Playwright e2e (client/tests/e2e/sku-detail-par-level.spec.ts) opens the deployed /sku/:sku route for a randomUUID-suffixed stocked SKU and asserts sku-par-level contains sku-par-not-tracked with text Not tracked and no sku-error is shown",
+      "ac_id": "AC3-par-level-not-tracked",
+      "status": "pending",
+      "kind": "client",
+      "scenario_file": "client/tests/e2e/sku-detail-par-level.spec.ts"
+    },
+    {
+      "id": "T50",
+      "description": "GET /api/skus/{sku} for a SKU with no stocked row responds 200 with Content-Type application/json, never an HTML error page (NFR5-spa-json-boundary)",
+      "ac_id": "AC4-sku-with-no-stock-empty-state",
+      "status": "pending",
+      "kind": "fitness",
+      "nfr_id": "NFR5-spa-json-boundary"
+    },
+    {
+      "id": "T51",
+      "description": "Playwright e2e (client/tests/e2e/sku-detail-empty.spec.ts) opens the deployed /sku/:sku route for a never-filed randomUUID-suffixed SKU and asserts sku-empty states no stock at any location with a Receive link to /receive?sku=<sku>, no sku-location entries and no sku-error",
+      "ac_id": "AC4-sku-with-no-stock-empty-state",
+      "status": "pending",
+      "kind": "client",
+      "scenario_file": "client/tests/e2e/sku-detail-empty.spec.ts"
+    }
+  ]
+}
