@@ -16,7 +16,7 @@
 #
 # Prerequisite: run the Consort bootstrap first – it installs + authenticates the tools
 #   (Node, Python, JDK, gh, Databricks CLI). Do NOT pin it to a tag/release; use main:
-#   bash <(curl -sL https://raw.githubusercontent.com/databricks-solutions/consort/main/bootstrap.sh)
+#   bash <(curl -sL https://tinyurl.com/consort-bootstrap)
 #
 # Usage:
 #   ./setup.sh <project-name> [options]
