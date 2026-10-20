@@ -35,7 +35,7 @@ Design is complete; no build code has been written yet.
 profile is ready to go. If you haven't set that up yet, run:
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/databricks-solutions/consort/main/bootstrap.sh)
+bash <(curl -sL https://tinyurl.com/consort-bootstrap)
 ```
 
 If you need Lakebase, you can try it on [Free Edition](https://login.databricks.com/signup?intent=SIGN_UP&provider=DB_FREE_TIER).
