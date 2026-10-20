@@ -16,9 +16,37 @@ you don't rediscover them.
 
 The rest of this runbook consumes a snapshot. This section is the inverse: what to commit so
 a repo *is* a ready-to-go snapshot – one you can clone and stand straight back up, **resume**
-the Consort workflow where it left off, and **replay** the run in the dashboard. Three kinds
-of thing are committed; everything else is regenerated during rehydration and is left out on
-purpose.
+the Consort workflow where it left off, and **replay** the run in the dashboard. The commit set is
+the kit-owned scaffold surface (item 0) plus three snapshot-specific additions; everything else is
+regenerated during rehydration and is left out on purpose.
+
+**0. Kit-owned scaffold surface – think in WHOLE DIRECTORIES, not a file list, on every branch.**
+A scaffolded project carries a kit-owned surface that the clone already has from its base scaffold
+commit. The kit lays these down as ENTIRE DIRECTORIES, so verify/commit **everything under each
+directory** — never a hand-maintained enumeration of individual files (that is exactly how a new
+kit file gets silently dropped). The kit-owned directories are:
+- `.claude/` — `agents/`, `commands/`, **and `skills/`** (the whole skill tree, all skills).
+- `scripts/` — the kit helper scripts (the scm-utils `scripts/lk` shim is project-owned, left as-is).
+- `.github/workflows/` — the CI workflows.
+- `app/` and `client/` — the scaffolded backend + SPA, **including** their test-capture files
+  (`app/consort_capture.py`, `client/consort-vitest-reporter.ts`, `client/playwright.config.ts`,
+  `client/tests/setup.ts`, `client/tests/e2e/consort-fixtures.ts`).
+- **The project ROOT** — the kit's root-level files: `consort-capture.ts`, `consort-test-reporter.ts`,
+  and `playwright.config.ts` (the test-capture + reporter wiring Vitest/Playwright import from
+  `../consort-capture` / `../consort-test-reporter`), alongside `.env.example`, `deploy-targets.yaml`,
+  `.gitignore`.
+
+> **Gotcha — a snapshot captured from an OLDER scaffold silently lacks newer kit files.** The
+> root test-capture files (`consort-capture.ts`, `consort-test-reporter.ts`, root `playwright.config.ts`)
+> were added in scm-utils **0.3.4**; a snapshot captured before that is missing them even though the
+> `.claude/agents/` surface looks current. On a rehydrated clone the build's test run then cannot start
+> (`Vitest + Playwright cannot start locally`) and the driver halts the lane on a **`scaffold-defect`**
+> smell — *not* a driver authoring bug, so it is NOT the driver's to fix. Because the surface is
+> directory-scoped, do not trust a file checklist: diff each kit-owned directory (`.claude/`, `scripts/`,
+> `.github/workflows/`, and the project root's kit files) against the pinned kit —
+> `templates/project/common/` (root files + `scripts/` + `.github/workflows/`) and `skills/` — and
+> restore any file the directory is missing (a `consort-upgrade` should refresh the full surface). Verify
+> the kit surface is complete BEFORE relying on the snapshot for a run.
 
 **1. Project tooling – on every branch.** `setup.sh`, `README.md`, and this
 `RUNBOOK-rehydrate-as-new-project.md`. They describe and boot the project independent of which
