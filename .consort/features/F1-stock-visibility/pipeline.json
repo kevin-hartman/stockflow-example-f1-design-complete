@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "feature_id": "F1-stock-visibility",
+  "stories": {
+    "S1-file-stock": {
+      "status": "ready",
+      "gate": {
+        "status": "approved",
+        "history": [
+          {
+            "action": "approved",
+            "at": "2026-10-20T05:51:30.642Z",
+            "approver": "Kevin Hartman"
+          }
+        ],
+        "approver": "Kevin Hartman",
+        "approved_at": "2026-10-20T05:51:30.642Z"
+      }
+    },
+    "S2-stock-by-location-table": {
+      "status": "ready",
+      "gate": {
+        "status": "approved",
+        "history": [
+          {
+            "action": "approved",
+            "at": "2026-10-20T05:52:14.045Z",
+            "approver": "Kevin Hartman"
+          }
+        ],
+        "approver": "Kevin Hartman",
+        "approved_at": "2026-10-20T05:52:14.045Z"
+      }
+    },
+    "S3-sku-detail-view": {
+      "status": "ready",
+      "gate": {
+        "status": "approved",
+        "history": [
+          {
+            "action": "approved",
+            "at": "2026-10-20T05:52:41.492Z",
+            "approver": "Kevin Hartman"
+          }
+        ],
+        "approver": "Kevin Hartman",
+        "approved_at": "2026-10-20T05:52:41.492Z"
+      }
+    }
+  },
+  "build_queue": [
+    "S1-file-stock",
+    "S2-stock-by-location-table",
+    "S3-sku-detail-view"
+  ],
+  "build_active": null
+}
