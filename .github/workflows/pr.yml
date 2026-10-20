@@ -27,11 +27,11 @@ jobs:
       - name: Resolve substrate ref
         # The runtime substrate (scripts/lk) resolves the substrate from .lakebase/scm-utils-ref;
         # CI follows the SAME ref so a scm-utils-ref bump takes effect here without editing
-        # this workflow (FEIP-8050, Finding 24). Falls back to v0.3.4,
+        # this workflow (FEIP-8050, Finding 24). Falls back to v0.3.5,
         # the version this project was scaffolded from, when .lakebase/scm-utils-ref is absent.
         run: |
           SCM_UTILS_REF="$(tr -d '[:space:]' < .lakebase/scm-utils-ref 2>/dev/null || true)"
-          SCM_UTILS_REF="${SCM_UTILS_REF:-v0.3.4}"
+          SCM_UTILS_REF="${SCM_UTILS_REF:-v0.3.5}"
           echo "SCM_UTILS_REF=${SCM_UTILS_REF}" >> "$GITHUB_ENV"
           # Registry-first for version tags, with a GitHub fallback when the registry
           # cannot serve the tarball yet: a freshly-published version is blocked by
@@ -58,7 +58,7 @@ jobs:
         # Routes through the substrate's lakebase-detect-language CLI so
         # the substrate.s marker-file detection (mirrors lakebase-schema-migrate's auto-
         # detect) is the single source of truth across pr.yml + merge.yml +
-        # the substrate's migrate runners. 0.3.4 is
+        # the substrate's migrate runners. 0.3.5 is
         # substituted at scaffold time to the substrate version that produced
         # this project.
         run: |
@@ -148,11 +148,6 @@ jobs:
       # the CI branch is provisioned and fail fast. `--if-present` no-ops a
       # client with no `test` script. The client's Playwright E2E runs later
       # (its own step, gated on client/playwright.config.ts).
-      - name: Run client unit tests
-        if: hashFiles('client/package.json') != ''
-        working-directory: client
-        run: npm run test --if-present
-
       # The official action installs to a user-writable path (no sudo). It's
       # a no-op if a compatible databricks CLI is already on PATH.
       - name: Install Databricks CLI
@@ -383,6 +378,20 @@ jobs:
             --branch "$LAKEBASE_BRANCH_NAME" \
             --pretty
           echo "Migrations completed."
+
+      - name: Run client unit tests
+        # The kit's client/vitest.globalSetup.ts boots a REAL backend over the /api
+        # boundary (never mock when a real counterpart exists), so the component suite
+        # NEEDS the CI Lakebase branch + DATABASE_URL. Run it AFTER datasource config +
+        # migrations, not before. No-op when there are no component tests (globalSetup
+        # returns early); skipped when there is no CI Lakebase branch (url empty).
+        if: hashFiles('client/package.json') != '' && steps.lakebase-db.outputs.url != ''
+        working-directory: client
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+          DB_USERNAME: ${{ env.DB_USERNAME }}
+          DB_PASSWORD: ${{ env.DB_PASSWORD }}
+        run: npm run test --if-present
 
       - name: Run tests
         env:
